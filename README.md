@@ -2,11 +2,27 @@
 
 A pnpm workspace with a React frontend and Elysia backend.
 
+- Shows and allows a user all the completed transactions and all authorizations.
+- Calculates the total spend on the card.
+- Shows the average spend.
+- Shows Categories of spend broken down by merchant code.
+- Has mobile and desktop views (The list component is slightly different between the two).
+  - Desktop View has pages
+  - Mobile View is infinite scroll
+
 ## Questions
 
 ### How else might you have improved your solution given more time?
 
-The pagination logic could use a bit more work. It's fine, and does what it's supposed to, but it'd be nice to track the pages a bit better. Kinda an issue with Stripe's API too.
+The pagination logic could use a bit more work. It's fine, and does what it's supposed to, but it'd be nice to track the pages a bit better. Kinda an issue with Stripe's API too. I basically forgot about useInfiniteQuery with React Query, and just threw a quick implementation of that in with the mobile view.
+
+Could set up webhooks and load transactions as they happen straight into the UI.
+
+I could always rabbit hole with more time on UI design.
+
+There's some small stuff with the UX of what's a Posted/Approved transaction and what's an authorization that could be clarified both with the API and the UI. Mainly that's handling the endge case with Stripe where the transactions are force completed. In a real-world scenario, authorizations _probably_ aren't forced through, so we could assume that Authorizations will contain all transactions. However, there are a lot of forced transactions, so they aren't surfaced with Authorizations.
+
+I started to go down the road of combining the two in the backend, but the IDs being different between the two objects in Stripe made that not super clean, so I didn't finish that. Fair critique if the expectation was to merge those two lists. If I were to do it, the cleanest way would be to have two filters `afterTransaction` and `afterAuthorization` and to make it work with React Query, we'd construct that on the frontend as `after=ipi_xxxx:iauth_xxxx` and then split it on the backend (the cursor based nature of React Query is the only reason I'd do it this way.)
 
 ### How might you have gone about further optimizing the load time of this view?
 
@@ -16,12 +32,15 @@ The analytics/reporting cache would probably look to see what's the latest trans
 - If yes: Send cached data.
 - If no: There's a new transaction, recalculate.
 
+You could do more continuous calculation of the analytics.
+
 ### Feedback and Calibration
 
 **Approximately how many hours did you spend on this challenge?**
 About 4 hours total, probably would be 2-3 if I wan't watching TV while doing it.
 **What did you find most interesting / rewarding about this challenge?**
-I like that it's part of - What did you find least interesting / rewarding about this challenge?
+I like that it uses a real integration to work with, that's kinda fun.
+**What did you find least interesting / rewarding about this challenge?**
 
 ## Structure
 
@@ -56,7 +75,7 @@ karat-challenge/
    This will start:
 
    - Frontend at http://localhost:3000
-   - Backend at http://localhost:3001
+   - Backend at http://localhost:3333
 
 ## Available Scripts
 

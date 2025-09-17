@@ -1,5 +1,5 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import "../App.css";
 import Dog from "../components/icons/dog";
 
@@ -15,7 +15,8 @@ const RootLayout = () => (
     <main className="p-2">
       <Outlet />
     </main>
-    <TanStackRouterDevtools />
+    {/* Devtools are disabled to clean up the UI */}
+    {/* <TanStackRouterDevtools /> */}
   </div>
 );
 

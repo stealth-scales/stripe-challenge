@@ -45,7 +45,10 @@ const stripeControllerFactory = (stripe: Stripe) => {
       return {
         averageAmount,
         totalTransactions: transactions.length,
-        totalAmount,
+        totalAmount: transactions.reduce(
+          (acc, transaction) => acc + transaction.amount,
+          0
+        ),
         activity,
       };
     })
