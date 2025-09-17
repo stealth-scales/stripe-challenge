@@ -14,11 +14,11 @@ A pnpm workspace with a React frontend and Elysia backend.
 
 ### Desktop View
 
-![Desktop View](./screenshots/desktop.png)
+![Desktop View](./demo_screenshot_desktop.png)
 
 ### Mobile View
 
-![Mobile View](./screenshots/mobile.png)
+![Mobile View](./demo_screenshot_mobile.png)
 
 ## Structure
 
