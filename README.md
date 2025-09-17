@@ -18,7 +18,7 @@ A pnpm workspace with a React frontend and Elysia backend.
 
 ### Mobile View
 
-![Mobile View](./demo_screenshot_mobile.png)
+![Mobile View](./demo_screenshot_iphone.png)
 
 ## Structure
 
