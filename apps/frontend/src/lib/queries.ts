@@ -1,7 +1,7 @@
 import { treaty } from "@elysiajs/eden";
 import { App } from "../../../backend/src";
 
-export const api = treaty<App>("http://localhost:3333");
+export const api = treaty<App>("http://192.168.50.140:3333");
 
 const getCardQuery = async (id: string) => {
   const card = await api.cards({ id }).get();

@@ -10,6 +10,16 @@ A pnpm workspace with a React frontend and Elysia backend.
   - Desktop View has pages
   - Mobile View is infinite scroll
 
+## Demo Screenshots
+
+### Desktop View
+
+![Desktop View](./screenshots/desktop.png)
+
+### Mobile View
+
+![Mobile View](./screenshots/mobile.png)
+
 ## Structure
 
 ```

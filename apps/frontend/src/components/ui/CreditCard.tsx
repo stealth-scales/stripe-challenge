@@ -9,12 +9,7 @@ interface CreditCardProps {
 
 const CreditCard = React.forwardRef<HTMLDivElement, CreditCardProps>(
   (
-    {
-      cardNumber = "**** **** **** 1234",
-      cardHolder = "John Doe",
-      className,
-      ...props
-    },
+    { cardNumber = "1234", cardHolder = "John Doe", className, ...props },
     ref
   ) => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
