@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Money from "../components/icons/money";
 import { Card, CardHeader, CardContent } from "../components/ui/Card";
+import { CreditCard } from "../components/ui/CreditCard";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -8,8 +9,10 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Card>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <CreditCard />
+
+      <Card className="col-span-1 lg:col-span-2">
         <CardHeader
           icon={<Money className="fill-slate-500 w-[20px] h-[20px]" />}
           title="Your Transactions"

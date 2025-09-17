@@ -19,6 +19,7 @@ interface CardContentProps {
   children: React.ReactNode;
   className?: string;
   padding?: "none" | "sm" | "md" | "lg";
+  variant?: "default" | "outlined" | "filled" | "gradient";
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -75,7 +76,10 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
 );
 
 const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
-  ({ children, className, padding = "md", ...props }, ref) => {
+  (
+    { children, className, padding = "md", variant = "default", ...props },
+    ref
+  ) => {
     const paddingStyles = {
       none: "",
       sm: "p-1",
@@ -83,14 +87,17 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
       lg: "p-4",
     };
 
+    const variants = {
+      default: "bg-white border border-slate-300 rounded-sm",
+      outlined: "bg-white rounded-sm",
+      filled: "bg-white border border-gray-200 rounded-sm",
+      gradient: "bg-white border border-gray-200 rounded-sm",
+    };
+
     return (
       <div
         ref={ref}
-        className={cn(
-          "bg-white border border-slate-300 rounded-sm",
-          paddingStyles[padding],
-          className
-        )}
+        className={cn(variants[variant], paddingStyles[padding], className)}
         {...props}
       >
         {children}
