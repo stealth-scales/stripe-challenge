@@ -2,6 +2,27 @@
 
 A pnpm workspace with a React frontend and Elysia backend.
 
+## Questions
+
+### How else might you have improved your solution given more time?
+
+The pagination logic could use a bit more work. It's fine, and does what it's supposed to, but it'd be nice to track the pages a bit better. Kinda an issue with Stripe's API too.
+
+### How might you have gone about further optimizing the load time of this view?
+
+Caching. Frontend caches the transactions and data between page changes, but having a backend cache for transactions and reporting pieces would be a good move. Otherwise, there's not a ton to optimize.
+The analytics/reporting cache would probably look to see what's the latest transaction, is it the same as the latest checked in the analytics?
+
+- If yes: Send cached data.
+- If no: There's a new transaction, recalculate.
+
+### Feedback and Calibration
+
+**Approximately how many hours did you spend on this challenge?**
+About 4 hours total, probably would be 2-3 if I wan't watching TV while doing it.
+**What did you find most interesting / rewarding about this challenge?**
+I like that it's part of - What did you find least interesting / rewarding about this challenge?
+
 ## Structure
 
 ```
@@ -17,7 +38,6 @@ karat-challenge/
 
 - Node.js >= 18.0.0
 - pnpm >= 8.0.0
-- Bun (for running the Elysia backend)
 
 ## Getting Started
 
@@ -60,13 +80,7 @@ pnpm preview    # Preview production build
 
 ```bash
 cd apps/backend
-bun dev         # Start dev server with hot reload
-bun build       # Build for production
-bun start       # Start production server
+pnpm dev         # Start dev server with hot reload
+pnpm build       # Build for production
+pnpm start       # Start production server
 ```
-
-## API Endpoints
-
-- `GET /` - Hello message
-- `GET /health` - Health check
-- `GET /api/hello?name=<name>` - Greeting with optional name parameter

@@ -10,6 +10,10 @@ const stripeControllerFactory = (stripe: Stripe) => {
     .get("/cards/:id/activity", async ({ params, query }) => {
       const transactions: Stripe.Issuing.Transaction[] = [];
       let has_more = true;
+
+      // This is not a super robust way to get the transactions.
+      // Real-world scenario might have issues with failing requests that need to be retried etc.
+
       while (has_more) {
         console.log("has_more", has_more);
         const _transactions = await stripe.issuing.transactions.list({
@@ -21,10 +25,7 @@ const stripeControllerFactory = (stripe: Stripe) => {
         has_more = _transactions.has_more;
       }
 
-      console.log("length", transactions.length);
-
       // Aggregate the transacations by category
-
       const activity: { [key: string]: { amount: number; count: number } } = {};
 
       for (const transaction of transactions) {
@@ -36,12 +37,15 @@ const stripeControllerFactory = (stripe: Stripe) => {
         activity[category].count++;
       }
 
+      const totalAmount = transactions.reduce(
+        (acc, transaction) => acc + transaction.amount,
+        0
+      );
+      const averageAmount = totalAmount / transactions.length;
       return {
+        averageAmount,
         totalTransactions: transactions.length,
-        totalAmount: transactions.reduce(
-          (acc, transaction) => acc + transaction.amount,
-          0
-        ),
+        totalAmount,
         activity,
       };
     })
@@ -55,6 +59,13 @@ const stripeControllerFactory = (stripe: Stripe) => {
       if (after && before) {
         throw new Error("after and before cannot be used together");
       }
+
+      /**
+       * Noting some gotcha edge cases:
+       * - A lot of the transactions on the card provided are `Force Capture` transactions. So they are not in the authorizations list.
+       * - There are only a handful of transactions that went through the authorization process successfully to the transactions list.
+       */
+
       switch (status) {
         case "approved":
           const transactions = await stripe.issuing.transactions.list({
@@ -70,7 +81,8 @@ const stripeControllerFactory = (stripe: Stripe) => {
               created: transaction.created,
               id: transaction.id,
               description: transaction.merchant_data.name,
-              category: transaction.merchant_data.category,
+              location: `${transaction.merchant_data.city}, ${transaction.merchant_data.state}`,
+              category: mccToCategory[transaction.merchant_data.category_code],
               status: "approved",
             })),
           };
@@ -88,7 +100,9 @@ const stripeControllerFactory = (stripe: Stripe) => {
               created: authorization.created,
               id: authorization.id,
               description: authorization.merchant_data.name,
-              category: authorization.merchant_data.category,
+              location: `${authorization.merchant_data.city}, ${authorization.merchant_data.state}`,
+              category:
+                mccToCategory[authorization.merchant_data.category_code],
               status: authorization.approved
                 ? "approved"
                 : authorization.status == "closed"

@@ -53,7 +53,7 @@ const CreditCard = React.forwardRef<HTMLDivElement, CreditCardProps>(
       <div
         ref={cardRef}
         className={cn(
-          "cc-card flex p-4 drop-shadow-lg relative overflow-hidden flex-row justify-between items-center from-indigo-500/70 to-blue-800/70 bg-gradient-to-b rounded-lg cursor-pointer transition-all duration-300",
+          "cc-card flex p-4 drop-shadow-lg relative overflow-hidden flex-row justify-between items-center from-indigo-500 to-blue-800 bg-gradient-to-b rounded-lg cursor-pointer transition-all duration-300",
           className
         )}
         onMouseMove={handleMouseMove}

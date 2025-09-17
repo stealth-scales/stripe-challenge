@@ -85,7 +85,10 @@ export const ActivityChart = ({ id }: { id: string }) => {
   };
 
   const formatAmount = (amount: number) => {
-    return `$${(Math.abs(amount) / 100).toFixed(2)}`;
+    return `${(Math.abs(amount) / 100).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })}`;
   };
 
   // Simple color palette

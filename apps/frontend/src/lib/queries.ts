@@ -12,11 +12,12 @@ const getCardTransactionsQuery = async (
   id: string,
   limit?: number,
   after?: string,
-  before?: string
+  before?: string,
+  status?: "approved" | "all"
 ) => {
   const transactuons = await api
     .cards({ id })
-    .transactions.get({ query: { limit, after, before, status: "approved" } });
+    .transactions.get({ query: { limit, after, before, status } });
   return transactuons;
 };
 
@@ -31,8 +32,9 @@ const getCardTransactionsQueryKey = (
   id: string,
   limit?: number,
   after?: string,
-  before?: string
-) => [...getCardQueryKey(id), "transactions", limit, after, before];
+  before?: string,
+  status?: "approved" | "all"
+) => [...getCardQueryKey(id), "transactions", limit, after, before, status];
 
 export {
   getCardQuery,
