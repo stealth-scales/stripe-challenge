@@ -53,7 +53,7 @@ const CreditCard = React.forwardRef<HTMLDivElement, CreditCardProps>(
       <div
         ref={cardRef}
         className={cn(
-          "cc-card flex p-4 drop-shadow-lg relative overflow-hidden flex-col from-indigo-500/70 to-blue-800/70 bg-gradient-to-b rounded-lg cursor-pointer transition-all duration-300 hover:drop-shadow-xl",
+          "cc-card flex p-4 drop-shadow-lg relative overflow-hidden flex-row justify-between items-center from-indigo-500/70 to-blue-800/70 bg-gradient-to-b rounded-lg cursor-pointer transition-all duration-300",
           className
         )}
         onMouseMove={handleMouseMove}
@@ -61,24 +61,26 @@ const CreditCard = React.forwardRef<HTMLDivElement, CreditCardProps>(
         {...props}
         style={{
           transition: "transform 0.3s ease-in-out",
-          transform: `rotateY(${
-            ((mousePosition.x - 50) / 50) * 10
-          }deg) rotateX(${((mousePosition.y - 50) / 50) * 10}deg)`,
+          transformStyle: "preserve-3d",
         }}
       >
         {/* Card Content */}
         <div className="flex flex-col opacity-90 relative z-10">
           <div className="text-white text-xl font-semibold font-mono">
-            {cardNumber}
+            **** **** **** {cardNumber}
           </div>
           <div className="text-white text-sm font-mono">{cardHolder}</div>
         </div>
+        <img
+          src="/Visa_Brandmark_White_RGB_2021.png"
+          className="h-6 object-contain"
+        />
 
         {/* Reflection Effect */}
         <div
           className="absolute top-0 left-0 blur-sm"
           style={{
-            transition: "transform 0.3s ease-in-out",
+            transition: "all 0.3s ease-in-out",
             transform: `translate(${(mousePosition.x - 50) * 0.75}px, ${
               (mousePosition.y - 50) * 0
             }px)`,
