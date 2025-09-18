@@ -13,14 +13,14 @@ A pnpm workspace with a React frontend and Elysia backend.
 ## Demo Screenshots
 
 <details>
-<summary>### Desktop View</summary>
+<summaryDesktop View</summary>
 
 ![Desktop View](./demo_screenshot_desktop.png)
 
 </details>
 
 <details>
-<summary>### Mobile View</summary>
+<summaryMobile View</summary>
 
 ![Mobile View](./demo_screenshot_iphone.jpeg)
 
