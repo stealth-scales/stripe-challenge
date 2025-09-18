@@ -109,6 +109,8 @@ pnpm start       # Start production server
 
 - I started to go down the road of combining the two in the backend, but the IDs being different between the two objects in Stripe made that not super clean, so I didn't finish that. Fair critique if the expectation was to merge those two lists. If I were to do it, the cleanest way would be to have two filters `afterTransaction` and `afterAuthorization` and to make it work with React Query, we'd construct that on the frontend as `after=ipi_xxxx:iauth_xxxx` and then split it on the backend (the cursor based nature of React Query is the only reason I'd do it this way.)
 
+- Tests. Could have written tests. I don't know exactly what tests would be helpful here other than if you wanted to test analyis math, or do e2e tests on the API + Stripe integration.
+
 ### How might you have gone about further optimizing the load time of this view?
 
 Caching. Frontend caches the transactions and data between page changes, but having a backend cache for transactions and reporting pieces would be a good move. Otherwise, there's not a ton to optimize.
@@ -117,7 +119,7 @@ The analytics/reporting cache would probably look to see what's the latest trans
 - If yes: Send cached data.
 - If no: There's a new transaction, recalculate.
 
-You could do more continuous calculation of the analytics.
+You could do more continuous calculation of the analytics, or have some seperate DB table/view scenario if you wanted that would eliminate the burdon of doing requests and math in the server.
 
 ### Feedback and Calibration
 
