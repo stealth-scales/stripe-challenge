@@ -20,7 +20,7 @@ A pnpm workspace with a React frontend and Elysia backend.
 </details>
 
 <details>
-<summar>Mobile View</summary>
+<summary>Mobile View</summary>
 
 ![Mobile View](./demo_screenshot_iphone.jpeg)
 
