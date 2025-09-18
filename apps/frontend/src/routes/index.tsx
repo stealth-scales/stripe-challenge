@@ -20,7 +20,9 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
+  // If you want to change the card...
   const cardId = "ic_1I1OFqE8hHKqEw8LK31tUA4U";
+
   const { data: card } = useQuery({
     queryKey: getCardQueryKey(cardId),
     queryFn: () => getCardQuery(cardId),

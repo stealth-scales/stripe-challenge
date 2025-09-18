@@ -41,6 +41,7 @@ karat-challenge/
 
 - Node.js >= 18.0.0
 - pnpm >= 8.0.0
+- Stripe API Secret Key
 
 ## Getting Started
 
@@ -50,7 +51,11 @@ karat-challenge/
    pnpm install
    ```
 
-2. Start development servers:
+2. Create an `.env` file
+
+   See `.env.example` to see the format required.
+
+3. Start development servers:
 
    ```bash
    pnpm dev
