@@ -53,7 +53,9 @@ karat-challenge/
 
 2. Create an `.env` file
 
-   See `.env.example` to see the format required.
+   ```
+   STRIPE_SECRET_KEY=sk_test_xxxxx
+   ```
 
 3. Start development servers:
 
