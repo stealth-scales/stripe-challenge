@@ -51,7 +51,7 @@ karat-challenge/
    pnpm install
    ```
 
-2. Create an `.env` file
+2. Create an `.env` file in `./apps/backend`
 
    ```
    STRIPE_SECRET_KEY=sk_test_xxxxx
